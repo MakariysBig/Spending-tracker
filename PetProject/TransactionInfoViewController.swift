@@ -117,7 +117,7 @@ class TransactionInfoViewController: UIViewController, NSFetchedResultsControlle
     @objc func chooseDate() {
         let dateFormatter = DateFormatter()
     
-        dateFormatter.dateFormat = "LLL yyyy, EEEE"
+        dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
         dateFormatter.locale = Locale(identifier: "en")
         
         dateTextField.text = dateFormatter.string(from: datePicker.date)
@@ -320,7 +320,7 @@ class TransactionInfoViewController: UIViewController, NSFetchedResultsControlle
         
         let dateFormatter = DateFormatter()
     
-        dateFormatter.dateFormat = "LLL yyyy, EEEE"
+        dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
         dateFormatter.locale = Locale(identifier: "en")
         
         let date = dateFormatter.string(from: transaction.createdAt!)

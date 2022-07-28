@@ -182,14 +182,14 @@ class TransactionViewController: UIViewController {
     
     private func setUpNavigationBarLayout() {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.red]
-        title = "Transactions"
+        title = "Amount"
+        
         let addButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle"), style: .done, target: self, action: #selector(addButtonTapped))
         addButton.tintColor = .red
-        
+
         navigationController?.navigationBar.tintColor = .red
         
         navigationItem.rightBarButtonItem = addButton
-       
     }
     
     func setUpAmountTextField(textField: UITextField) {
@@ -358,7 +358,7 @@ class TransactionViewController: UIViewController {
         var predicte: NSPredicate?
         
         if !name.isEmpty {
-            predicte = NSPredicate(format: "createdAt <= %@", name)
+            predicte = NSPredicate(format: "createdAt >= %@ AND createdAt <= %@", date1! as NSDate, date2! as NSDate)
         } else {
             predicte = nil
         }
@@ -412,6 +412,7 @@ extension TransactionViewController: UITableViewDelegate, UITableViewDataSource 
         
         fullAmount += transaction.amount
         calculateAmountLabel.text = "Amount \(fullAmount)"
+//        navigationItem.title = "Amount \(fullAmount)"
 //        self.amount += Double(transaction.note!)!
 //        print(amount)
         
@@ -478,6 +479,7 @@ extension TransactionViewController: UISearchBarDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(#function)
         getItemsWithDate()
+        fullAmount = 0.0
         tableView.reloadData()
     }
     
@@ -514,7 +516,7 @@ extension TransactionViewController: NSFetchedResultsControllerDelegate {
 extension TransactionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        return fetchedResultsController.sections?.first?.numberOfObjects ?? 0
-        return 1
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -524,13 +526,13 @@ extension TransactionViewController: UICollectionViewDelegate, UICollectionViewD
         
         let dateFormater = DateFormatter()
         
-        dateFormater.dateFormat = "MM/dd/yyyy"
+        dateFormater.dateFormat = "dd/MM/yyyy"
         dateFormater.locale = Locale(identifier: "En")
         
         let date = dateFormater.string(from: transaction.createdAt!)
         
         
-        cell.textLabel.text = date
+        cell.textLabel.text = "01/07/2022 - 31/07/2022"
         
         return cell
     }
@@ -540,7 +542,7 @@ extension TransactionViewController: UICollectionViewDelegate, UICollectionViewD
 
 extension TransactionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 120, height: 50)
+        return CGSize(width: 220, height: 50)
     }
     
     
