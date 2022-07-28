@@ -247,6 +247,7 @@ class TransactionViewController: UIViewController {
             self.save(withAmount: convertTextAmount, textNote: noteText)
             self.fullAmount = 0.0
             self.tableView.reloadData()
+            self.collectionView?.reloadData()
             
         }
         
@@ -307,6 +308,8 @@ class TransactionViewController: UIViewController {
         } catch {
             print("I can't save")
         }
+        
+
     }
     
     func getItems() {
