@@ -23,6 +23,8 @@ class TransactionViewController: UIViewController {
     let searchBar = UISearchBar()
     
     var fullAmount = 0.0
+    var maounthSet: Set<String> = []
+    var mounthArray: [String] = []
     
     let plusButton = UIButton()
     
@@ -53,6 +55,7 @@ class TransactionViewController: UIViewController {
 //        setUpCollectionViewLayout()
         
         self.collectionView = setUpCollectionViewLayout()
+        
         setUpTableViewLayout()
         configureTableView()
         setUpNavigationBarLayout()
@@ -80,6 +83,21 @@ class TransactionViewController: UIViewController {
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        view.endEditing(true)
 //    }
+    private func calculateCellForCollectionView(indexPath: IndexPath) {
+        let transaction = fetchedResultsController.object(at: indexPath)
+        
+        let dateFormater = DateFormatter()
+        
+        dateFormater.dateFormat = "MMMM"
+        dateFormater.locale = Locale(identifier: "En")
+        
+        let date = dateFormater.string(from: transaction.createdAt!) //July
+        
+        if self.maounthSet.insert(date).inserted == true {
+            maounthSet.insert(date)
+            mounthArray.append(date)
+        }
+    }
     
     private func setUpCollectionViewLayout() -> UICollectionView {
 //        view.addSubview(collectionView)
@@ -182,7 +200,7 @@ class TransactionViewController: UIViewController {
     
     private func setUpNavigationBarLayout() {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.red]
-        title = "Amount"
+        title = "Transaction"
         
         let addButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle"), style: .done, target: self, action: #selector(addButtonTapped))
         addButton.tintColor = .red
@@ -328,33 +346,17 @@ class TransactionViewController: UIViewController {
         print(#function)
         let name = "680"
         
+        
+        
+        
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         
         let date1 = dateFormatter.date(from: "07/01/2022")
         let date2 = dateFormatter.date(from: "07/31/2022")
 
-        let elapsedTime = date2?.timeIntervalSince(date1!)
-        
-        let startDate = NSDate().timeIntervalSinceReferenceDate
-        
-//        let endDate = NSDate().startOfMonth()
-        
-        let fullFormatter = DateFormatter()
-//        let dayFormatter = DateFormatter()
 
-//        fullFormatter.dateFormat = "EEEE dd LLLL"
-        fullFormatter.dateFormat = "LLL yyyy, EEEE"
-
-//        dayFormatter.dateFormat = "dd"
-
-        fullFormatter.locale = Locale(identifier: "en")
-//        dayFormatter.locale = Locale(identifier: "en")
-        
-//        let date = fullFormatter.string(from: elapsedTime!)
-//        let day = dayFormatter.string(from: transaction.createdAt!)
-        
-        
         var predicte: NSPredicate?
         
         if !name.isEmpty {
@@ -384,7 +386,7 @@ extension TransactionViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as? CustomCell else { return UITableViewCell() }
         
-        
+        calculateCellForCollectionView(indexPath: indexPath)
         
         let transaction = fetchedResultsController.object(at: indexPath)
         
@@ -516,7 +518,7 @@ extension TransactionViewController: NSFetchedResultsControllerDelegate {
 extension TransactionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        return fetchedResultsController.sections?.first?.numberOfObjects ?? 0
-        return 5
+        return maounthSet.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -524,15 +526,24 @@ extension TransactionViewController: UICollectionViewDelegate, UICollectionViewD
         
         let transaction = fetchedResultsController.object(at: indexPath)
         
-        let dateFormater = DateFormatter()
-        
-        dateFormater.dateFormat = "dd/MM/yyyy"
-        dateFormater.locale = Locale(identifier: "En")
-        
-        let date = dateFormater.string(from: transaction.createdAt!)
         
         
-        cell.textLabel.text = "01/07/2022 - 31/07/2022"
+        let item = mounthArray[indexPath.row]
+        
+//        let dateFormater = DateFormatter()
+//
+//        dateFormater.dateFormat = "MMMM"
+//        dateFormater.locale = Locale(identifier: "En")
+//
+//        let date = dateFormater.string(from: transaction.createdAt!) //July
+//
+//        if self.maounthSet.insert(date).inserted == true {
+//            return cell
+//        }
+        
+        let mounth = item
+        
+        cell.textLabel.text = mounth
         
         return cell
     }
@@ -542,7 +553,7 @@ extension TransactionViewController: UICollectionViewDelegate, UICollectionViewD
 
 extension TransactionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 220, height: 50)
+        return CGSize(width: 220, height: 40)
     }
     
     
