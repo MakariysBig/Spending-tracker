@@ -239,6 +239,7 @@ class TransactionInfoViewController: UIViewController, NSFetchedResultsControlle
         amountTextField.borderStyle = .roundedRect
         amountTextField.layer.borderWidth = 2
         amountTextField.layer.cornerRadius = 10
+        amountTextField.keyboardType = .decimalPad
         
         amountTextField.translatesAutoresizingMaskIntoConstraints = false
         

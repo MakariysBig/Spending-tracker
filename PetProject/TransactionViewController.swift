@@ -221,6 +221,7 @@ class TransactionViewController: UIViewController {
         
         alert.addTextField { textField in
             textField.placeholder = "Write amount"
+            textField.keyboardType = .decimalPad
         }
         
         alert.addTextField { textField in
