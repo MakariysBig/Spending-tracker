@@ -81,8 +81,8 @@ class TransactionInfoViewController: UIViewController, NSFetchedResultsControlle
         
         
         
-        view.backgroundColor = .black
-        
+        view.backgroundColor = .white
+//        navigationController?.navigationBar.
         
        
     }
@@ -303,6 +303,7 @@ class TransactionInfoViewController: UIViewController, NSFetchedResultsControlle
         coreDataStack.save()
         transactionViewController.tableView.reloadData()
         transactionViewController.tableView.reloadRows(at: [indexPath], with: .fade)
+        transactionViewController.collectionView?.reloadData()
 //        transactions.append(transaction)
     }
     
@@ -333,7 +334,7 @@ class TransactionInfoViewController: UIViewController, NSFetchedResultsControlle
     
     private func setUpContentViewLayout() {
         view.addSubview(contentView)
-        contentView.backgroundColor = .black
+        contentView.backgroundColor = .white
      
         contentView.translatesAutoresizingMaskIntoConstraints = false
         

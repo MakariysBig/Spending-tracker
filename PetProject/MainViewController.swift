@@ -7,7 +7,7 @@ class MainViewController: UIViewController {
     
     let logInButton = UIButton()
     let tabBar = UITabBarController()
-    let addNewTransactionViewController = AddNewTransactionViewController()
+//    let addNewTransactionViewController = AddNewTransactionViewController()
     
     let button = UIButton()
     
@@ -17,9 +17,8 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .green
 //        setUpLogInButtonLayout()
-//        setUpButtonLayout()
+
         configureTabBar()
-//        setUpButtonLayout()
     }
     
     //MARK: - Private Methods
@@ -38,15 +37,6 @@ class MainViewController: UIViewController {
             button.centerXAnchor.constraint(equalTo: tabBar.tabBar.centerXAnchor),
 
         ])
-        
-        button.addTarget(self, action: #selector(addNewTransaction), for: .touchUpInside)
-        
-    }
-    
-    @objc func addNewTransaction() {
-        print(#function)
-        addNewTransactionViewController.modalPresentationStyle = .formSheet
-        self.present(addNewTransactionViewController, animated: true)
     }
 
     private func setUpLogInButtonLayout() {
@@ -73,17 +63,13 @@ class MainViewController: UIViewController {
     private func configureTabBar() {
 //        let tabBar = UITabBarController()
         tabBar.tabBar.addSubview(button)
-        let button = UIBarButtonItem(image: UIImage(systemName: "plus.circle.fill"), style: .plain, target: self, action: #selector(addNewTransaction))
+//        let button = UIBarButtonItem(image: UIImage(systemName: "plus.circle.fill"), style: .plain, target: self, action: #selector(addNewTransaction))
         let vc1 = UINavigationController(rootViewController: TransactionViewController())
         let vc2 = UINavigationController(rootViewController: FirstViewController())
         let vc3 = UINavigationController(rootViewController: AddNewTransactionViewController())
         
         
-        let vc4 = UIViewController()
-        vc4.modalPresentationStyle = .none
-        vc4.view.backgroundColor = .blue
-        vc4.tabBarItem.title = "plus"
-        vc4.tabBarItem.image = UIImage(systemName: "plus.circle.fill")
+        
         
         
         vc1.title = "Transactions"
@@ -93,15 +79,18 @@ class MainViewController: UIViewController {
         
         vc1.tabBarItem.image = UIImage(systemName: "briefcase.fill")
         vc2.tabBarItem.image = UIImage(systemName: "gear")
-//        vc3.tabBarItem.image = UIImage(systemName: "plus.circle.fill")
+        vc3.tabBarItem.image = UIImage(systemName: "plus.circle.fill")
         
         tabBar.tabBar.tintColor = .black
-        tabBar.navigationItem.setLeftBarButton(button, animated: true)
-        tabBar.setViewControllers([vc1, vc2], animated: true)
-        tabBar.setToolbarItems([button], animated: true)
+//        tabBar.navigationItem.setLeftBarButton(button, animated: true)
+        tabBar.setViewControllers([vc1, vc3, vc2], animated: true)
+//        tabBar.setToolbarItems([button], animated: true)
+        tabBar.tabBar.layer.borderWidth = 0.2
+        tabBar.tabBar.layer.borderColor = UIColor.black.cgColor
+
         
         tabBar.tabBar.tintColor = .red
-        tabBar.tabBar.backgroundColor = .black
+        tabBar.tabBar.backgroundColor = .white
         tabBar.modalPresentationStyle = .fullScreen
         
         present(tabBar, animated: true)

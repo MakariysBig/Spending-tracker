@@ -18,6 +18,9 @@ class CustomCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(textLabel)
         
         backgroundColor = .white
+        contentView.layer.borderWidth = 2
+        contentView.layer.borderColor = UIColor.black.cgColor
+        contentView.layer.cornerRadius = 5
         textLabel.textColor = .black
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         

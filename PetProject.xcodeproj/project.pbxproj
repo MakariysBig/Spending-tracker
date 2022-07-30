@@ -23,6 +23,7 @@
 		CE85AE9C2890139400D35F30 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85AE9B2890139400D35F30 /* CustomCollectionViewCell.swift */; };
 		CEBF303B28843B8D0015168A /* TransactionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF303A28843B8D0015168A /* TransactionInfoViewController.swift */; };
 		CEBF303D288552590015168A /* AddNewTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF303C288552590015168A /* AddNewTransactionViewController.swift */; };
+		CEEF07E02895406F00AC8A6B /* TransactionObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF07DF2895406F00AC8A6B /* TransactionObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		CE85AE9B2890139400D35F30 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		CEBF303A28843B8D0015168A /* TransactionInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionInfoViewController.swift; sourceTree = "<group>"; };
 		CEBF303C288552590015168A /* AddNewTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTransactionViewController.swift; sourceTree = "<group>"; };
+		CEEF07DF2895406F00AC8A6B /* TransactionObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				CE16310B286B776900BE720B /* Info.plist */,
 				CE67E4CF288044C2001515C8 /* PetProject.xcdatamodeld */,
 				CE67E4D22880484B001515C8 /* CoreDataStack.swift */,
+				CEEF07DF2895406F00AC8A6B /* TransactionObject.swift */,
 			);
 			path = PetProject;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE163102286B776600BE720B /* MainViewController.swift in Sources */,
+				CEEF07E02895406F00AC8A6B /* TransactionObject.swift in Sources */,
 				CE1630FE286B776600BE720B /* AppDelegate.swift in Sources */,
 				CE163100286B776600BE720B /* SceneDelegate.swift in Sources */,
 				CE85AE9C2890139400D35F30 /* CustomCollectionViewCell.swift in Sources */,
