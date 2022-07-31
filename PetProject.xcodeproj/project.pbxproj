@@ -23,6 +23,8 @@
 		CE85AE9C2890139400D35F30 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85AE9B2890139400D35F30 /* CustomCollectionViewCell.swift */; };
 		CEBF303B28843B8D0015168A /* TransactionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF303A28843B8D0015168A /* TransactionInfoViewController.swift */; };
 		CEBF303D288552590015168A /* AddNewTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF303C288552590015168A /* AddNewTransactionViewController.swift */; };
+		CEEC84C72896839A00676C52 /* Profit+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC84C52896839A00676C52 /* Profit+CoreDataClass.swift */; };
+		CEEC84C82896839A00676C52 /* Profit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC84C62896839A00676C52 /* Profit+CoreDataProperties.swift */; };
 		CEEF07E02895406F00AC8A6B /* TransactionObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF07DF2895406F00AC8A6B /* TransactionObject.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,8 @@
 		CE85AE9B2890139400D35F30 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		CEBF303A28843B8D0015168A /* TransactionInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionInfoViewController.swift; sourceTree = "<group>"; };
 		CEBF303C288552590015168A /* AddNewTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTransactionViewController.swift; sourceTree = "<group>"; };
+		CEEC84C52896839A00676C52 /* Profit+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profit+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CEEC84C62896839A00676C52 /* Profit+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profit+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CEEF07DF2895406F00AC8A6B /* TransactionObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,6 +66,8 @@
 		CE1630F1286B776500BE720B = {
 			isa = PBXGroup;
 			children = (
+				CEEC84C52896839A00676C52 /* Profit+CoreDataClass.swift */,
+				CEEC84C62896839A00676C52 /* Profit+CoreDataProperties.swift */,
 				CE67E4D428805318001515C8 /* Transaction+CoreDataClass.swift */,
 				CE67E4D528805318001515C8 /* Transaction+CoreDataProperties.swift */,
 				CE1630FC286B776600BE720B /* PetProject */,
@@ -175,10 +181,12 @@
 				CEEF07E02895406F00AC8A6B /* TransactionObject.swift in Sources */,
 				CE1630FE286B776600BE720B /* AppDelegate.swift in Sources */,
 				CE163100286B776600BE720B /* SceneDelegate.swift in Sources */,
+				CEEC84C72896839A00676C52 /* Profit+CoreDataClass.swift in Sources */,
 				CE85AE9C2890139400D35F30 /* CustomCollectionViewCell.swift in Sources */,
 				CE67E4D1288044C3001515C8 /* PetProject.xcdatamodeld in Sources */,
 				CE67E4D628805318001515C8 /* Transaction+CoreDataClass.swift in Sources */,
 				CEBF303D288552590015168A /* AddNewTransactionViewController.swift in Sources */,
+				CEEC84C82896839A00676C52 /* Profit+CoreDataProperties.swift in Sources */,
 				CE67E4D728805318001515C8 /* Transaction+CoreDataProperties.swift in Sources */,
 				CE163134286B805400BE720B /* TransactionViewController.swift in Sources */,
 				CE163112286B7D6A00BE720B /* FirstViewController.swift in Sources */,

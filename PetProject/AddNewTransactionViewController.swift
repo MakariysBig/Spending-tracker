@@ -58,6 +58,7 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
         
         
         saveExpenseButtonLayout()
+//        saveIncomeButtonLayout()
         setUpsegmentedControllerLayout()
         fetchedResultsController.delegate = self
         
@@ -115,8 +116,9 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
             saveExpenseButtonLayout()
             print("sell")
         case 1:
+//            saveExpenseButton.isHidden = true
             saveIncomeButtonLayout()
-            
+//            saveExpenseButton.isHidden = true
             print("income")
         default:
             saveExpenseButtonLayout()
@@ -347,6 +349,7 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
         let transaction = Transaction(context: context)
         
         transaction.amount = amount
+        transaction.income = 0.0
         transaction.createdAt = Date()
         transaction.note = note
         
@@ -409,7 +412,7 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
             saveIncomeButton.trailingAnchor.constraint(equalTo: coverView.trailingAnchor),
         ])
         
-        saveExpenseButton.addTarget(self, action: #selector(saveIncomeAction), for: .touchUpInside)
+        saveIncomeButton.addTarget(self, action: #selector(saveIncomeAction), for: .touchUpInside)
     }
     
 //    private func showAlert() {

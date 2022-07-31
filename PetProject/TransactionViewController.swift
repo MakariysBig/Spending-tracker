@@ -49,6 +49,23 @@ class TransactionViewController: UIViewController {
         return fetchedResultsController
     }()
     
+    lazy var fetchedResultsControllerProfit: NSFetchedResultsController<Profit> = {
+        
+        let fetchRequest = Profit.fetchRequest()
+        let context = coreDataStack.managedContext
+        
+        
+//        let sort = NSSortDescriptor(key: #keyPath(Profit.createdAt), ascending: false)
+//        fetchRequest.sortDescriptors = [sort]
+        
+        
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: coreDataStack.managedContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        
+        return fetchedResultsController
+    }()
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -418,7 +435,14 @@ extension TransactionViewController: UITableViewDelegate, UITableViewDataSource 
         let date = fullFormatter.string(from: transaction.createdAt!)
         let day = dayFormatter.string(from: transaction.createdAt!)
         
-        cell.amountLabel.text = String(transaction.amount)
+        if transaction.amount == 0.0 {
+            cell.amountLabel.text = String(transaction.income)
+            cell.amountLabel.textColor = .green
+        } else {
+            cell.amountLabel.text = String(transaction.amount)
+        }
+        
+//        cell.amountLabel.text = String(transaction.amount)
         cell.dateLabel.text = date
         cell.dayLabel.text = day
         cell.noteLabel.text = transaction.note
