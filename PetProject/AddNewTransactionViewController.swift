@@ -11,8 +11,9 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
     let datePicker = UIDatePicker()
     let dateLabel = UILabel()
     
-    let saveButton = UIButton()
-        
+    let saveExpenseButton = UIButton()
+    let saveIncomeButton = UIButton()
+    
    
     
     let amountLabel = UILabel()
@@ -45,8 +46,8 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
         setUpContentViewLayout()
         setUpCoverViewLayout()
         
-        setUpAmountTextFieldLayout()
-        setUpAmountLabelLayout()
+        setUpExpenseAmountTextFieldLayout()
+//        setUpAmountLabelLayout()
 
         setUpNoteTextFieldLayout()
         setUpNotetLabelLayout()
@@ -56,8 +57,8 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
         setUpDateLabelLAyout()
         
         
-        saveButtonLayout()
-        
+        saveExpenseButtonLayout()
+        setUpsegmentedControllerLayout()
         fetchedResultsController.delegate = self
         
         
@@ -79,6 +80,51 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
         dateTextField.text = dateFormatter.string(from: Date())
         
     }
+    
+    private func setUpsegmentedControllerLayout() {
+        let items = ["Expense", "Income"]
+        let segmentedController = UISegmentedControl(items: items)
+        
+        
+        contentView.addSubview(segmentedController)
+        segmentedController.translatesAutoresizingMaskIntoConstraints = false
+        segmentedController.layer.borderWidth = 2
+        segmentedController.layer.borderColor = UIColor.black.cgColor
+        segmentedController.selectedSegmentIndex = 0
+        segmentedController.backgroundColor = .lightGray
+//        segmentedController.selectedSegmentTintColor = .red
+        
+        NSLayoutConstraint.activate([
+            segmentedController.trailingAnchor.constraint(equalTo: amountTextField.trailingAnchor),
+            segmentedController.leadingAnchor.constraint(equalTo: amountTextField.leadingAnchor),
+
+            segmentedController.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            segmentedController.bottomAnchor.constraint(equalTo: amountTextField.topAnchor, constant: -4)
+//            segmentedController.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+//            segmentedController.widthAnchor.constraint(equalToConstant: 200),
+//            segmentedController.heightAnchor.constraint(equalToConstant: 100)
+        ])
+        
+        segmentedController.addTarget(self, action: #selector(changeSignAction), for: .valueChanged)
+    }
+    
+    @objc func changeSignAction(sender: UISegmentedControl) {
+        print(#function)
+        switch sender.selectedSegmentIndex {
+        case 0:
+            saveExpenseButtonLayout()
+            print("sell")
+        case 1:
+            saveIncomeButtonLayout()
+            
+            print("income")
+        default:
+            saveExpenseButtonLayout()
+            print("default")
+        }
+    }
+    
+    
     
     private func setUpCoverViewLayout() {
         contentView.addSubview(coverView)
@@ -222,6 +268,107 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
     
     
     
+    private func setUpExpenseAmountTextFieldLayout() {
+        coverView.addSubview(amountTextField)
+        
+        amountTextField.placeholder = "Enter amount"
+
+        amountTextField.borderStyle = .roundedRect
+        amountTextField.layer.borderWidth = 2
+        amountTextField.layer.cornerRadius = 10
+        amountTextField.keyboardType = .decimalPad
+        
+        amountTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            amountTextField.leadingAnchor.constraint(equalTo: coverView.leadingAnchor, constant: 10),
+            amountTextField.trailingAnchor.constraint(equalTo: coverView.trailingAnchor, constant: -10),
+            amountTextField.topAnchor.constraint(equalTo: coverView.topAnchor, constant: 30),
+            amountTextField.heightAnchor.constraint(equalToConstant: 50)
+
+
+        ])
+    }
+    
+    private func saveExpenseButtonLayout() {
+        contentView.addSubview(saveExpenseButton)
+        saveExpenseButton.setTitle("Save expense", for: .normal)
+        saveExpenseButton.setTitleColor(.white, for: .normal)
+        saveExpenseButton.backgroundColor = .orange
+        saveExpenseButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 23)
+        saveExpenseButton.layer.cornerRadius = 10
+        
+        
+        saveExpenseButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            saveExpenseButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
+            saveExpenseButton.heightAnchor.constraint(equalToConstant: 50),
+            saveExpenseButton.leadingAnchor.constraint(equalTo: coverView.leadingAnchor),
+            saveExpenseButton.trailingAnchor.constraint(equalTo: coverView.trailingAnchor),
+        ])
+        
+        saveExpenseButton.addTarget(self, action: #selector(saveExpenseAction), for: .touchUpInside)
+    }
+    
+    private func showAlert() {
+        let alert = UIAlertController(title: "Somthing wrong!!!", message: "Pleas write amount", preferredStyle: .alert)
+        
+
+        
+        let cancelAction = UIAlertAction(title: "OK", style: .destructive, handler: nil)
+        
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
+        
+    }
+    
+    @objc func saveExpenseAction() {
+        print(#function)
+        guard let amountText = amountTextField.text, !amountText.isEmpty else { return showAlert() }
+        
+        let noteText = noteTextField.text ?? ""
+        
+        guard let convertTextAmount = Double(amountText) else { return }
+        
+//        self.save(withAmount: convertTextAmount, textNote: noteText)
+        save(withAmount: convertTextAmount, textNote: noteText)
+
+        tabBarController?.selectedIndex = 0
+        
+    }
+    
+    
+    
+    func save(withAmount amount: Double, textNote note: String) {
+
+        let context = coreDataStack.managedContext
+        let transaction = Transaction(context: context)
+        
+        transaction.amount = amount
+        transaction.createdAt = Date()
+        transaction.note = note
+        
+        coreDataStack.save()
+    }
+    
+
+    private func setUpContentViewLayout() {
+        view.addSubview(contentView)
+        contentView.backgroundColor = .white
+     
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    //
+    
     private func setUpAmountTextFieldLayout() {
         coverView.addSubview(amountTextField)
         
@@ -244,94 +391,68 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
         ])
     }
     
-    private func saveButtonLayout() {
-        contentView.addSubview(saveButton)
-        saveButton.setTitle("Save transaction", for: .normal)
-        saveButton.setTitleColor(.white, for: .normal)
-        saveButton.backgroundColor = .orange
-        saveButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 23)
-        saveButton.layer.cornerRadius = 10
+    private func saveIncomeButtonLayout() {
+        contentView.addSubview(saveIncomeButton)
+        saveIncomeButton.setTitle("Save income", for: .normal)
+        saveIncomeButton.setTitleColor(.white, for: .normal)
+        saveIncomeButton.backgroundColor = .orange
+        saveIncomeButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 23)
+        saveIncomeButton.layer.cornerRadius = 10
         
         
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
+        saveIncomeButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            saveButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
-            saveButton.heightAnchor.constraint(equalToConstant: 50),
-            saveButton.leadingAnchor.constraint(equalTo: coverView.leadingAnchor),
-            saveButton.trailingAnchor.constraint(equalTo: coverView.trailingAnchor),
+            saveIncomeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
+            saveIncomeButton.heightAnchor.constraint(equalToConstant: 50),
+            saveIncomeButton.leadingAnchor.constraint(equalTo: coverView.leadingAnchor),
+            saveIncomeButton.trailingAnchor.constraint(equalTo: coverView.trailingAnchor),
         ])
         
-        saveButton.addTarget(self, action: #selector(saveTransactionAction), for: .touchUpInside)
-    }
-    private func showAlert() {
-        let alert = UIAlertController(title: "Somthing wrong!!!", message: "Pleas write amount", preferredStyle: .alert)
-        
-
-        
-        let cancelAction = UIAlertAction(title: "OK", style: .destructive, handler: nil)
-        
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true)
-        
+        saveExpenseButton.addTarget(self, action: #selector(saveIncomeAction), for: .touchUpInside)
     }
     
-    @objc func saveTransactionAction() {
-        
-//        guard let amountTextField = alert.textFields?.first,
+//    private func showAlert() {
+//        let alert = UIAlertController(title: "Somthing wrong!!!", message: "Pleas write amount", preferredStyle: .alert)
+//
+//
+//
+//        let cancelAction = UIAlertAction(title: "OK", style: .destructive, handler: nil)
+//
+//        alert.addAction(cancelAction)
+//
+//        present(alert, animated: true)
+//
+//    }
+    
+    @objc func saveIncomeAction() {
+        print(#function)
         guard let amountText = amountTextField.text, !amountText.isEmpty else { return showAlert() }
         
-//        guard let noteTextField = alert.textFields?.last else { return }
-        //                  let secondtext = secondtextField.text, !secondtext.isEmpty else { return }
         let noteText = noteTextField.text ?? ""
-        //            let note = Transaction(amount: 0, note: text, date: "0")
-        //
-        //            self.transactions.append(note)
-        
         
         guard let convertTextAmount = Double(amountText) else { return }
-        self.save(withAmount: convertTextAmount, textNote: noteText)
         
-        
-        
-        save(withAmount: convertTextAmount, textNote: noteText)
-        
-//        navigationController?.pushViewController(transactionViewController, animated: true)
+        saveIncome(withAmount: convertTextAmount, textNote: noteText)
+
         tabBarController?.selectedIndex = 0
         
     }
     
-    func save(withAmount amount: Double, textNote note: String) {
+    
+    
+    func saveIncome(withAmount amount: Double, textNote note: String) {
 
-        
         let context = coreDataStack.managedContext
         let transaction = Transaction(context: context)
         
-        transaction.amount = amount
+        transaction.amount = 0.0
+        transaction.income = amount
         transaction.createdAt = Date()
         transaction.note = note
         
         coreDataStack.save()
-        
     }
-    
-
-    private func setUpContentViewLayout() {
-        view.addSubview(contentView)
-        contentView.backgroundColor = .white
-     
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
-    }
-    
-    
 }
     
 

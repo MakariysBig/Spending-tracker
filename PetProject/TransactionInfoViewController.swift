@@ -158,7 +158,7 @@ class TransactionInfoViewController: UIViewController, NSFetchedResultsControlle
         noteTextField.borderStyle = .roundedRect
         noteTextField.layer.borderWidth = 2
         noteTextField.layer.cornerRadius = 10
-        
+        noteTextField.delegate = self
         
         noteTextField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -271,15 +271,14 @@ class TransactionInfoViewController: UIViewController, NSFetchedResultsControlle
             saveButton.trailingAnchor.constraint(equalTo: coverView.trailingAnchor),
         ])
         
-        saveButton.addTarget(self, action: #selector(saveTransactionAction), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(saveExpenseAction), for: .touchUpInside)
     }
     
-    @objc func saveTransactionAction() {
+    @objc func saveExpenseAction() {
         
         save(withAmount: Double(amountTextField.text!)!, textNote: noteTextField.text ?? "", textDate: datePicker.date)
         navigationController?.popViewController(animated: true)
         
-        print(#function)
     }
     
     func save(withAmount amount: Double, textNote note: String, textDate date: Date) {
@@ -288,23 +287,14 @@ class TransactionInfoViewController: UIViewController, NSFetchedResultsControlle
         
         
         transaction.amount = amount
+        
         transaction.note = note
         transaction.createdAt = date
-//        transaction.createdAt = Date()
-//        transaction.note = note
-//        guard let entity = NSEntityDescription.entity(forEntityName: "Transaction", in: context) else { return }
-//
-//        let transaction = NSManagedObject(entity: entity, insertInto: context)
-//
-//        transaction.setValue(note, forKey: "note")
-//        fullAmount += amount
-//        calculateAmountLabel.text = "Amount \(fullAmount)"
         
         coreDataStack.save()
         transactionViewController.tableView.reloadData()
         transactionViewController.tableView.reloadRows(at: [indexPath], with: .fade)
         transactionViewController.collectionView?.reloadData()
-//        transactions.append(transaction)
     }
     
     func getItems() {
@@ -349,4 +339,10 @@ class TransactionInfoViewController: UIViewController, NSFetchedResultsControlle
     
 }
 
-
+//MARK: - UITextFieldDelegate
+extension TransactionInfoViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        noteTextField.resignFirstResponder()
+        return true
+    }
+}
