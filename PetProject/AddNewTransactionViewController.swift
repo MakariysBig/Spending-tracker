@@ -327,7 +327,7 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
     }
     
     @objc func saveExpenseAction() {
-        print(#function)
+        
         guard let amountText = amountTextField.text, !amountText.isEmpty else { return showAlert() }
         
         let noteText = noteTextField.text ?? ""
@@ -448,11 +448,15 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
 
         let context = coreDataStack.managedContext
         let transaction = Transaction(context: context)
+//        let profit = Profit(context: context)
         
         transaction.amount = 0.0
         transaction.income = amount
         transaction.createdAt = Date()
         transaction.note = note
+        
+//        transaction.income += amount
+        
         
         coreDataStack.save()
     }

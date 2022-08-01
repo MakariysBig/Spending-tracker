@@ -6,6 +6,7 @@ class TransactionInfoViewController: UIViewController, NSFetchedResultsControlle
     let contentView = UIView()
     let coverView = UIView()
     
+    let customCell = CustomCell()
     
     let dateTextField = UITextField()
     let datePicker = UIDatePicker()
@@ -285,10 +286,19 @@ class TransactionInfoViewController: UIViewController, NSFetchedResultsControlle
         
         let transaction = fetchedResultsController.object(at: indexPath)
         
+        if transaction.amount == 0.0 {
+            transaction.income = amount
+            
+            coreDataStack.save()
+        } else {
+            transaction.amount = amount
+            coreDataStack.save()
+        }
         
-        transaction.amount = amount
+//        transaction.amount = amount
         
         transaction.note = note
+//        customCell.noteLabel.text = note
         transaction.createdAt = date
         
         coreDataStack.save()
@@ -307,7 +317,14 @@ class TransactionInfoViewController: UIViewController, NSFetchedResultsControlle
         
         let transaction = fetchedResultsController.object(at: indexPath)
         
-        amountTextField.text = "\(transaction.amount)"
+        if transaction.amount == 0.0 {
+            amountTextField.text = "\(transaction.income )"
+            
+        } else {
+            amountTextField.text = "\(transaction.amount)"
+        }
+        
+//        amountTextField.text = "\(transaction.amount)"
         noteTextField.text = "\(transaction.note ?? "")"
         
         let dateFormatter = DateFormatter()

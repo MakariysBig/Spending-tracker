@@ -83,7 +83,7 @@ class MainViewController: UIViewController {
         
         tabBar.tabBar.tintColor = .black
 //        tabBar.navigationItem.setLeftBarButton(button, animated: true)
-        tabBar.setViewControllers([vc1, vc3, vc2], animated: true)
+        tabBar.setViewControllers([vc1, vc3], animated: true)
 //        tabBar.setToolbarItems([button], animated: true)
         tabBar.tabBar.layer.borderWidth = 0.2
         tabBar.tabBar.layer.borderColor = UIColor.black.cgColor
