@@ -351,7 +351,7 @@ class TransactionViewController: UIViewController {
         expenseCount -= transaction.amount
         incomeCount += transaction.amount
         incomeCount -= transaction.income
-        calculateAmountLabel.text = "Spent in this month: \(expenseCount)"
+        calculateAmountLabel.text = "Your spent: \(expenseCount)"
         yourBalanceLabel.text = "Your balance: \(incomeCount)"
         context.delete(transaction)
         
