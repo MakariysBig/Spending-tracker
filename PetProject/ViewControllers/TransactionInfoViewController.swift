@@ -93,6 +93,8 @@ class TransactionInfoViewController: UIViewController, NSFetchedResultsControlle
     private func setUpDatePickerLayout() {
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .inline
+        let loc = Locale(identifier: "en")
+        datePicker.locale = loc
         
         datePicker.addTarget(self, action: #selector(chooseDate), for: .valueChanged)
     }
@@ -287,6 +289,15 @@ class TransactionInfoViewController: UIViewController, NSFetchedResultsControlle
         ])
     }
     
+    private func showAlertNumbers() {
+        let alert = UIAlertController(title: "Error", message: "How did it get here? Try again but use numbers!!!", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "OK", style: .destructive, handler: nil)
+        
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
+    }
+    
     //MARK: - Ovveride methods
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -296,7 +307,11 @@ class TransactionInfoViewController: UIViewController, NSFetchedResultsControlle
     //MARK: - Action
     
     @objc func saveExpenseAction() {
-        save(withAmount: Double(amountTextField.text!)!, textNote: noteTextField.text ?? "", textDate: datePicker.date)
+        guard let amountText = amountTextField.text, !amountText.isEmpty else { return }
+        
+        guard let convertTextAmount = Double(amountText) else { return showAlertNumbers() }
+        
+        save(withAmount: Double(convertTextAmount), textNote: noteTextField.text ?? "", textDate: datePicker.date)
         navigationController?.popViewController(animated: true)
     }
     

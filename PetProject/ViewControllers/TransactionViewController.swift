@@ -50,14 +50,14 @@ class TransactionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+        setUpYourBalanceLayout()
+        setUpCalculateAmountLayout()
         setUpTableViewLayout()
         configureTableView()
         setUpNavigationBarLayout()
         getItems()
         setUpSearchBarLayout()
-        setUpCalculateAmountLayout()
-        setUpYourBalanceLayout()
+        
         fetchedResultsController.delegate = self
     }
     
@@ -69,7 +69,7 @@ class TransactionViewController: UIViewController {
         calculateExpense()
         calculateIncome()
         yourBalanceLabel.text = "Your balance: \(incomeCount)"
-        calculateAmountLabel.text = "Spent in this month: \(expenseCount)"
+        calculateAmountLabel.text = "Your spent: \(expenseCount)"
         loadData()
         
         coreDataStack = CoreDataStack()
@@ -92,7 +92,7 @@ class TransactionViewController: UIViewController {
         calculateExpense()
         calculateIncome()
         yourBalanceLabel.text = "Your balance: \(incomeCount)"
-        calculateAmountLabel.text = "Spent in this month: \(expenseCount)"
+        calculateAmountLabel.text = "Your spent: \(expenseCount)"
         
         fetchedResultsController.delegate = self
         tableView.reloadData()
@@ -228,30 +228,32 @@ class TransactionViewController: UIViewController {
         yourBalanceLabel.text = "Your balance: \(calculateIncome())"
         yourBalanceLabel.textColor = .black
         yourBalanceLabel.backgroundColor = .white
+        yourBalanceLabel.font = UIFont.boldSystemFont(ofSize: 20)
         
         yourBalanceLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            yourBalanceLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            yourBalanceLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             yourBalanceLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            yourBalanceLabel.bottomAnchor.constraint(equalTo: calculateAmountLabel.topAnchor, constant: 10),
-            yourBalanceLabel.heightAnchor.constraint(equalToConstant: 40)
+            yourBalanceLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+            yourBalanceLabel.heightAnchor.constraint(equalToConstant: 28)
         ])
     }
     
     private func setUpCalculateAmountLayout() {
         view.addSubview(calculateAmountLabel)
-        calculateAmountLabel.text = "Spent: \(calculateExpense())"
+        calculateAmountLabel.text = "Your spent: \(calculateExpense())"
         calculateAmountLabel.textColor = .black
         calculateAmountLabel.backgroundColor = .white
+        calculateAmountLabel.font = UIFont.boldSystemFont(ofSize: 20)
         
         calculateAmountLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            calculateAmountLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            calculateAmountLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             calculateAmountLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            calculateAmountLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            calculateAmountLabel.heightAnchor.constraint(equalToConstant: 40)
+            calculateAmountLabel.topAnchor.constraint(equalTo: yourBalanceLabel.bottomAnchor),
+            calculateAmountLabel.heightAnchor.constraint(equalToConstant: 28)
         ])
     }
     
@@ -543,7 +545,7 @@ extension TransactionViewController: UISearchBarDelegate {
         calculateExpense()
         
         yourBalanceLabel.text = "Your balance: \(incomeCount)"
-        calculateAmountLabel.text = "Your expence: \(expenseCount)"
+        calculateAmountLabel.text = "Your spent: \(expenseCount)"
         tableView.reloadData()
     }
     

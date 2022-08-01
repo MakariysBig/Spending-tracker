@@ -109,6 +109,9 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
     private func setUpDatePickerLayout() {
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .inline
+        let loc = Locale(identifier: "en")
+        datePicker.locale = loc
+        
         datePicker.addTarget(self, action: #selector(chooseDate), for: .valueChanged)
     }
     
@@ -147,6 +150,7 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
         noteTextField.borderStyle = .roundedRect
         noteTextField.layer.borderWidth = 2
         noteTextField.layer.cornerRadius = 10
+        noteTextField.delegate = self
         
         noteTextField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -250,6 +254,15 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
         present(alert, animated: true)
     }
     
+    private func showAlertNumbers() {
+        let alert = UIAlertController(title: "Error", message: "How did it get here? Try again but use numbers!!!", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "OK", style: .destructive, handler: nil)
+        
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
+    }
+    
     private func save(withAmount amount: Double, textNote note: String) {
 
         let context = coreDataStack.managedContext
@@ -342,7 +355,7 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
         
         let noteText = noteTextField.text ?? ""
         
-        guard let convertTextAmount = Double(amountText) else { return }
+        guard let convertTextAmount = Double(amountText) else { return showAlertNumbers() }
         
         saveIncome(withAmount: convertTextAmount, textNote: noteText)
 
@@ -355,7 +368,7 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
         
         let noteText = noteTextField.text ?? ""
         
-        guard let convertTextAmount = Double(amountText) else { return }
+        guard let convertTextAmount = Double(amountText) else { return showAlertNumbers() }
         
         save(withAmount: convertTextAmount, textNote: noteText)
 
@@ -381,5 +394,12 @@ class AddNewTransactionViewController: UIViewController, NSFetchedResultsControl
         default:
             saveExpenseButtonLayout()
         }
+    }
+}
+//MARK: - UITextFieldDelegate
+extension AddNewTransactionViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        noteTextField.resignFirstResponder()
+        return true
     }
 }
