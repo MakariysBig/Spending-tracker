@@ -62,10 +62,7 @@
 		CE1630F1286B776500BE720B = {
 			isa = PBXGroup;
 			children = (
-				CEEC84C52896839A00676C52 /* Profit+CoreDataClass.swift */,
-				CEEC84C62896839A00676C52 /* Profit+CoreDataProperties.swift */,
-				CE67E4D428805318001515C8 /* Transaction+CoreDataClass.swift */,
-				CE67E4D528805318001515C8 /* Transaction+CoreDataProperties.swift */,
+				CEEC84D22897D64200676C52 /* CoreData */,
 				CE1630FC286B776600BE720B /* PetProject */,
 				CE1630FB286B776600BE720B /* Products */,
 			);
@@ -87,11 +84,6 @@
 				CEEC84CF2897D03B00676C52 /* CustomCell */,
 				CEEC84D02897D30300676C52 /* Models */,
 				CEEC84D12897D45B00676C52 /* Supporting files */,
-				CE163103286B776600BE720B /* Main.storyboard */,
-				CE163106286B776900BE720B /* Assets.xcassets */,
-				CE163108286B776900BE720B /* LaunchScreen.storyboard */,
-				CE16310B286B776900BE720B /* Info.plist */,
-				CE67E4CF288044C2001515C8 /* PetProject.xcdatamodeld */,
 			);
 			path = PetProject;
 			sourceTree = "<group>";
@@ -136,8 +128,24 @@
 		CEEC84D12897D45B00676C52 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				CE163103286B776600BE720B /* Main.storyboard */,
+				CE163106286B776900BE720B /* Assets.xcassets */,
+				CE163108286B776900BE720B /* LaunchScreen.storyboard */,
+				CE16310B286B776900BE720B /* Info.plist */,
+				CE67E4CF288044C2001515C8 /* PetProject.xcdatamodeld */,
 			);
 			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		CEEC84D22897D64200676C52 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				CEEC84C52896839A00676C52 /* Profit+CoreDataClass.swift */,
+				CEEC84C62896839A00676C52 /* Profit+CoreDataProperties.swift */,
+				CE67E4D428805318001515C8 /* Transaction+CoreDataClass.swift */,
+				CE67E4D528805318001515C8 /* Transaction+CoreDataProperties.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,7 +383,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B76BBTR724;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PetProject/Info.plist;
+				INFOPLIST_FILE = "/Users/user/Desktop/Pet_Project/untitled folder/PetProject/PetProject/Supporting files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -404,7 +412,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B76BBTR724;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PetProject/Info.plist;
+				INFOPLIST_FILE = "/Users/user/Desktop/Pet_Project/untitled folder/PetProject/PetProject/Supporting files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
