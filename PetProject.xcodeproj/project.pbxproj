@@ -83,7 +83,7 @@
 				CEEC84CE2897C7FE00676C52 /* ViewControllers */,
 				CEEC84CF2897D03B00676C52 /* CustomCell */,
 				CEEC84D02897D30300676C52 /* Models */,
-				CEEC84D12897D45B00676C52 /* Supporting files */,
+				CEEC84D12897D45B00676C52 /* SupportingFiles */,
 			);
 			path = PetProject;
 			sourceTree = "<group>";
@@ -125,7 +125,7 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		CEEC84D12897D45B00676C52 /* Supporting files */ = {
+		CEEC84D12897D45B00676C52 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
 				CE163103286B776600BE720B /* Main.storyboard */,
@@ -134,7 +134,7 @@
 				CE16310B286B776900BE720B /* Info.plist */,
 				CE67E4CF288044C2001515C8 /* PetProject.xcdatamodeld */,
 			);
-			path = "Supporting files";
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		CEEC84D22897D64200676C52 /* CoreData */ = {
@@ -383,7 +383,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B76BBTR724;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/PetProject/PetProject/Supporting files/Info.plist";
+				INFOPLIST_FILE = /PetProject/PetProject/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -412,7 +412,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B76BBTR724;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/PetProject/PetProject/Supporting files/Info.plist";
+				INFOPLIST_FILE = /PetProject/PetProject/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
