@@ -13,7 +13,6 @@
 		CE163105286B776600BE720B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE163103286B776600BE720B /* Main.storyboard */; };
 		CE163107286B776900BE720B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE163106286B776900BE720B /* Assets.xcassets */; };
 		CE16310A286B776900BE720B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE163108286B776900BE720B /* LaunchScreen.storyboard */; };
-		CE163112286B7D6A00BE720B /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE163111286B7D6A00BE720B /* FirstViewController.swift */; };
 		CE163134286B805400BE720B /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE163133286B805400BE720B /* TransactionViewController.swift */; };
 		CE67E4D1288044C3001515C8 /* PetProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE67E4CF288044C2001515C8 /* PetProject.xcdatamodeld */; };
 		CE67E4D32880484B001515C8 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67E4D22880484B001515C8 /* CoreDataStack.swift */; };
@@ -25,7 +24,6 @@
 		CEBF303D288552590015168A /* AddNewTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF303C288552590015168A /* AddNewTransactionViewController.swift */; };
 		CEEC84C72896839A00676C52 /* Profit+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC84C52896839A00676C52 /* Profit+CoreDataClass.swift */; };
 		CEEC84C82896839A00676C52 /* Profit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC84C62896839A00676C52 /* Profit+CoreDataProperties.swift */; };
-		CEEF07E02895406F00AC8A6B /* TransactionObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF07DF2895406F00AC8A6B /* TransactionObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +35,6 @@
 		CE163106286B776900BE720B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE163109286B776900BE720B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE16310B286B776900BE720B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CE163111286B7D6A00BE720B /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		CE163133286B805400BE720B /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		CE67E4D0288044C2001515C8 /* PetProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PetProject.xcdatamodel; sourceTree = "<group>"; };
 		CE67E4D22880484B001515C8 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -49,7 +46,6 @@
 		CEBF303C288552590015168A /* AddNewTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTransactionViewController.swift; sourceTree = "<group>"; };
 		CEEC84C52896839A00676C52 /* Profit+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profit+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CEEC84C62896839A00676C52 /* Profit+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profit+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CEEF07DF2895406F00AC8A6B /* TransactionObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,24 +82,62 @@
 		CE1630FC286B776600BE720B /* PetProject */ = {
 			isa = PBXGroup;
 			children = (
-				CE1630FD286B776600BE720B /* AppDelegate.swift */,
-				CE1630FF286B776600BE720B /* SceneDelegate.swift */,
-				CE163101286B776600BE720B /* MainViewController.swift */,
-				CE163133286B805400BE720B /* TransactionViewController.swift */,
-				CE85AE9B2890139400D35F30 /* CustomCollectionViewCell.swift */,
-				CE6C888028880F8800D88D1E /* CustomCell.swift */,
-				CEBF303A28843B8D0015168A /* TransactionInfoViewController.swift */,
-				CEBF303C288552590015168A /* AddNewTransactionViewController.swift */,
-				CE163111286B7D6A00BE720B /* FirstViewController.swift */,
+				CEEC84CD2897C7D600676C52 /* Delegates */,
+				CEEC84CE2897C7FE00676C52 /* ViewControllers */,
+				CEEC84CF2897D03B00676C52 /* CustomCell */,
+				CEEC84D02897D30300676C52 /* Models */,
+				CEEC84D12897D45B00676C52 /* Supporting files */,
 				CE163103286B776600BE720B /* Main.storyboard */,
 				CE163106286B776900BE720B /* Assets.xcassets */,
 				CE163108286B776900BE720B /* LaunchScreen.storyboard */,
 				CE16310B286B776900BE720B /* Info.plist */,
 				CE67E4CF288044C2001515C8 /* PetProject.xcdatamodeld */,
-				CE67E4D22880484B001515C8 /* CoreDataStack.swift */,
-				CEEF07DF2895406F00AC8A6B /* TransactionObject.swift */,
 			);
 			path = PetProject;
+			sourceTree = "<group>";
+		};
+		CEEC84CD2897C7D600676C52 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				CE1630FD286B776600BE720B /* AppDelegate.swift */,
+				CE1630FF286B776600BE720B /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		CEEC84CE2897C7FE00676C52 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CE163101286B776600BE720B /* MainViewController.swift */,
+				CE163133286B805400BE720B /* TransactionViewController.swift */,
+				CEBF303A28843B8D0015168A /* TransactionInfoViewController.swift */,
+				CEBF303C288552590015168A /* AddNewTransactionViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CEEC84CF2897D03B00676C52 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE85AE9B2890139400D35F30 /* CustomCollectionViewCell.swift */,
+				CE6C888028880F8800D88D1E /* CustomCell.swift */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
+		CEEC84D02897D30300676C52 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE67E4D22880484B001515C8 /* CoreDataStack.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CEEC84D12897D45B00676C52 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Supporting files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,7 +212,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE163102286B776600BE720B /* MainViewController.swift in Sources */,
-				CEEF07E02895406F00AC8A6B /* TransactionObject.swift in Sources */,
 				CE1630FE286B776600BE720B /* AppDelegate.swift in Sources */,
 				CE163100286B776600BE720B /* SceneDelegate.swift in Sources */,
 				CEEC84C72896839A00676C52 /* Profit+CoreDataClass.swift in Sources */,
@@ -189,7 +222,6 @@
 				CEEC84C82896839A00676C52 /* Profit+CoreDataProperties.swift in Sources */,
 				CE67E4D728805318001515C8 /* Transaction+CoreDataProperties.swift in Sources */,
 				CE163134286B805400BE720B /* TransactionViewController.swift in Sources */,
-				CE163112286B7D6A00BE720B /* FirstViewController.swift in Sources */,
 				CE67E4D32880484B001515C8 /* CoreDataStack.swift in Sources */,
 				CE6C888128880F8800D88D1E /* CustomCell.swift in Sources */,
 				CEBF303B28843B8D0015168A /* TransactionInfoViewController.swift in Sources */,

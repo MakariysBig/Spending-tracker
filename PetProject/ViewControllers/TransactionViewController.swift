@@ -5,49 +5,32 @@ class TransactionViewController: UIViewController {
     
     //MARK: - Properties
     
-    var amountTextField: UITextField?
     let yourBalanceLabel = UILabel()
-    var transactions: [Transaction] = []
-    var double: [NSManagedObject] = []
-    
-
     let customCell = CustomCell()
-    var expenseCount = 0.0
-    var incomeCount = 0.0
-    
-    var collectionView: UICollectionView?
-
-    
-//    let addNewTransactionViewController = AddNewTransactionViewController()
-    
-    var coreDataStack = CoreDataStack()
-    
     let tableView = UITableView()
     let searchBar = UISearchBar()
-    
-    
-    var maounthSet: Set<String> = []
-    var monthArray: [String] = []
-    
     let plusButton = UIButton()
-    
     let calculateAmountLabel = UILabel()
     
-    
+    var amountTextField: UITextField?
+    var transactions: [Transaction] = []
+    var double: [NSManagedObject] = []
+    var expenseCount = 0.0
+    var incomeCount = 0.0
+    var collectionView: UICollectionView?
+    var coreDataStack = CoreDataStack()
+    var maounthSet: Set<String> = []
+    var monthArray: [String] = []
     
     lazy var fetchedResultsController: NSFetchedResultsController<Transaction> = {
         
         let fetchRequest = Transaction.fetchRequest()
         let context = coreDataStack.managedContext
         
-        
         let sort = NSSortDescriptor(key: #keyPath(Transaction.createdAt), ascending: false)
         fetchRequest.sortDescriptors = [sort]
         
-        
-        
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: coreDataStack.managedContext, sectionNameKeyPath: nil, cacheName: nil)
-        
         
         return fetchedResultsController
     }()
@@ -57,14 +40,7 @@ class TransactionViewController: UIViewController {
         let fetchRequest = Profit.fetchRequest()
         let context = coreDataStack.managedContext
         
-        
-//        let sort = NSSortDescriptor(key: #keyPath(Profit.createdAt), ascending: false)
-//        fetchRequest.sortDescriptors = [sort]
-        
-        
-        
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: coreDataStack.managedContext, sectionNameKeyPath: nil, cacheName: nil)
-        
         
         return fetchedResultsController
     }()
@@ -74,75 +50,57 @@ class TransactionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-//        self.collectionView = setUpCollectionViewLayout()
         
         setUpTableViewLayout()
         configureTableView()
         setUpNavigationBarLayout()
         getItems()
-       
         setUpSearchBarLayout()
         setUpCalculateAmountLayout()
         setUpYourBalanceLayout()
-//        calculateAmount()
-        
-        
-//        calculateSomthing()
         fetchedResultsController.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-            getItems()
-            expenseCount = 0.0
-            incomeCount = 0.0
-            calculateExpense()
-            calculateIncome()
-            yourBalanceLabel.text = "Your balance: \(incomeCount)"
-            calculateAmountLabel.text = "Spent in this month: \(expenseCount)"
-    //        getItemsForReloadTable()
-            loadData()
-
-
-            coreDataStack = CoreDataStack()
-            fetchedResultsController = {
-
-                let fetchRequest = Transaction.fetchRequest()
-                let context = coreDataStack.managedContext
-
-
-                let sort = NSSortDescriptor(key: #keyPath(Transaction.createdAt), ascending: false)
-                fetchRequest.sortDescriptors = [sort]
-
-
-
-                let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-
-
-                return fetchedResultsController
-            }()
-            getItems()
+        super.viewWillAppear(animated)
+        getItems()
         expenseCount = 0.0
         incomeCount = 0.0
         calculateExpense()
         calculateIncome()
         yourBalanceLabel.text = "Your balance: \(incomeCount)"
         calculateAmountLabel.text = "Spent in this month: \(expenseCount)"
-
-            fetchedResultsController.delegate = self
-            tableView.reloadData()
-
-        }
+        loadData()
+        
+        coreDataStack = CoreDataStack()
+        fetchedResultsController = {
+            
+            let fetchRequest = Transaction.fetchRequest()
+            let context = coreDataStack.managedContext
+            
+            let sort = NSSortDescriptor(key: #keyPath(Transaction.createdAt), ascending: false)
+            fetchRequest.sortDescriptors = [sort]
+            
+            let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            
+            return fetchedResultsController
+        }()
+        
+        getItems()
+        expenseCount = 0.0
+        incomeCount = 0.0
+        calculateExpense()
+        calculateIncome()
+        yourBalanceLabel.text = "Your balance: \(incomeCount)"
+        calculateAmountLabel.text = "Spent in this month: \(expenseCount)"
+        
+        fetchedResultsController.delegate = self
+        tableView.reloadData()
+    }
     //MARK: - Private Methods
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        view.endEditing(true)
-//    }
-    
-    func loadData() {
+    private func loadData() {
         let fetchRequest = Transaction.fetchRequest()
-//        let context = coreDataStack.managedContext
-        
         
         let sort = NSSortDescriptor(key: #keyPath(Transaction.createdAt), ascending: false)
         fetchRequest.sortDescriptors = [sort]
@@ -179,10 +137,9 @@ class TransactionViewController: UIViewController {
         }
     }
     
-    func calculateExpense() {
+    private func calculateExpense() {
         let transaction = fetchedResultsController.fetchedObjects ?? []
         var arrayExpense = [(Int, Double)]()
-        
         
         for (index, amount) in transaction.enumerated() {
             arrayExpense += [(index, amount.amount)]
@@ -193,7 +150,6 @@ class TransactionViewController: UIViewController {
             expenseCount += amount
         }
         print("calcualte amount\(expenseCount)")
-        
     }
     
     private func calculateIncome() {
@@ -210,19 +166,18 @@ class TransactionViewController: UIViewController {
         for (_, amount) in arrayAmount {
             expenseCount += amount
         }
-    
+        
         for (index, income) in transaction.enumerated() {
             arrayIncome += [(index, income.income)]
         }
         print(arrayIncome)
-
+        
         for (_, income) in arrayIncome {
             incomeCount += income
         }
         incomeCount -= expenseCount
         print("calcualte income \(incomeCount)")
     }
-
     
     private func calculateCellForCollectionView(indexPath: IndexPath) {
         let transaction = fetchedResultsController.object(at: indexPath)
@@ -241,7 +196,6 @@ class TransactionViewController: UIViewController {
     }
     
     private func setUpCollectionViewLayout() -> UICollectionView {
-//        view.addSubview(collectionView)
         
         let layout = UICollectionViewFlowLayout()
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -282,7 +236,6 @@ class TransactionViewController: UIViewController {
             yourBalanceLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             yourBalanceLabel.bottomAnchor.constraint(equalTo: calculateAmountLabel.topAnchor, constant: 10),
             yourBalanceLabel.heightAnchor.constraint(equalToConstant: 40)
-
         ])
     }
     
@@ -299,7 +252,6 @@ class TransactionViewController: UIViewController {
             calculateAmountLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             calculateAmountLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             calculateAmountLabel.heightAnchor.constraint(equalToConstant: 40)
-
         ])
     }
     
@@ -326,12 +278,6 @@ class TransactionViewController: UIViewController {
     private func setUpNavigationBarLayout() {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.red]
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-//        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle"), style: .done, target: self, action: #selector(addButtonTapped))
-//        addButton.tintColor = .red
-//
-//        navigationController?.navigationBar.tintColor = .red
-//        navigationItem.rightBarButtonItem = addButton
     }
     
     private func setUpAmountTextField(textField: UITextField) {
@@ -350,14 +296,14 @@ class TransactionViewController: UIViewController {
         alert.addTextField { textField in
             textField.placeholder = "Write note"
         }
-
+        
         let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
             guard let amountTextField = alert.textFields?.first,
                   let amountText = amountTextField.text, !amountText.isEmpty else { return }
             
             guard let noteTextField = alert.textFields?.last else { return }
             let noteText = noteTextField.text ?? ""
-
+            
             guard let convertTextAmount = Double(amountText) else { return }
             self.save(withAmount: convertTextAmount, textNote: noteText)
             self.expenseCount = 0.0
@@ -372,7 +318,6 @@ class TransactionViewController: UIViewController {
         alert.addAction(saveAction)
         
         present(alert, animated: true)
-        
     }
     
     private func setUpSearchBarLayout() {
@@ -383,10 +328,6 @@ class TransactionViewController: UIViewController {
         tableView.tableHeaderView = searchBar
     }
     
-    @objc func addButtonTapped() {
-        showAlert()
-    }
-    
     private func save(withAmount amount: Double, textNote note: String) {
         let context = coreDataStack.managedContext
         let transaction = Transaction(context: context)
@@ -394,7 +335,7 @@ class TransactionViewController: UIViewController {
         transaction.amount = amount
         transaction.createdAt = Date()
         transaction.note = note
-
+        
         expenseCount += amount
         calculateAmountLabel.text = "Amount \(expenseCount)"
         
@@ -403,7 +344,6 @@ class TransactionViewController: UIViewController {
     
     private func deleteTransaction(at indexPath: IndexPath) {
         let transaction = fetchedResultsController.object(at: indexPath)
-//        let transaction = transactions[indexPath.row]
         let context = coreDataStack.managedContext
         
         expenseCount -= transaction.amount
@@ -421,14 +361,13 @@ class TransactionViewController: UIViewController {
     }
     
     private func getItems() {
-
+        
         do {
-             try fetchedResultsController.performFetch()
+            try fetchedResultsController.performFetch()
             
         } catch {
             print("I can't fetch transactions")
         }
-        
         tableView.reloadData()
     }
     
@@ -456,34 +395,32 @@ class TransactionViewController: UIViewController {
         let reversedMonhtArray: [String] = Array(monthArray.reversed())
         let month = reversedMonhtArray[indexPath.row]
         
-//        let month = monthArray[indexPath.row]
-
         let dateFormatterrr = DateFormatter()
         dateFormatterrr.locale = Locale(identifier: "en")
         dateFormatterrr.dateFormat = "MMMM"
-
+        
         let monthDate = dateFormatterrr.date(from: month)
-
+        
         func startOfMonth() -> Date? {
             var comp: DateComponents = Calendar.current.dateComponents([.year, .month, .day], from: Calendar.current.startOfDay(for: monthDate!))
             comp.day! += 1
             comp.year = 2022
-                return Calendar.current.date(from: comp)!
+            return Calendar.current.date(from: comp)!
         }
-
+        
         func endOfMonth() -> Date? {
             var comp: DateComponents = Calendar.current.dateComponents([.year, .month , .day], from: Calendar.current.startOfDay(for: monthDate!))
             comp.month! += 1
             comp.year = 2022
-                return Calendar.current.date(from: comp)!
+            return Calendar.current.date(from: comp)!
         }
-
+        
         let firstDay = startOfMonth()
         let lastDay = endOfMonth()
         
         let dateFormatterToString = DateFormatter()
         dateFormatterToString.dateFormat = "MM/dd/yyyy"
-
+        
         var predicte: NSPredicate?
         
         if !name.isEmpty {
@@ -499,6 +436,12 @@ class TransactionViewController: UIViewController {
         } catch {
             print("I can't fetch transactions")
         }
+    }
+    
+    //MARK: - Action
+    
+    @objc func addButtonTapped() {
+        showAlert()
     }
 }
 
@@ -516,15 +459,13 @@ extension TransactionViewController: UITableViewDelegate, UITableViewDataSource 
         
         let transaction = fetchedResultsController.object(at: indexPath)
         
-        
         let fullFormatter = DateFormatter()
         let dayFormatter = DateFormatter()
-
-//        fullFormatter.dateFormat = "EEEE dd LLLL"
+        
         fullFormatter.dateFormat = "LLL yyyy, EEEE"
-
+        
         dayFormatter.dateFormat = "dd"
-
+        
         fullFormatter.locale = Locale(identifier: "en")
         dayFormatter.locale = Locale(identifier: "en")
         
@@ -539,19 +480,10 @@ extension TransactionViewController: UITableViewDelegate, UITableViewDataSource 
             cell.amountLabel.textColor = .red
         }
         
-//        cell.amountLabel.text = String(transaction.amount)
         cell.dateLabel.text = date
         cell.dayLabel.text = day
         cell.noteLabel.text = transaction.note
         
-//        incomeCount -= transaction.amount
-//        expenseCount += transaction.amount
-//
-//
-//
-//        yourBalanceLabel.text = "Your balance: \(incomeCount)"
-//        calculateAmountLabel.text = "Spent in this month: \(expenseCount)"
-
         return cell
     }
     
@@ -563,7 +495,7 @@ extension TransactionViewController: UITableViewDelegate, UITableViewDataSource 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
         searchBar.showsCancelButton = false
-
+        
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -589,7 +521,6 @@ extension TransactionViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             deleteTransaction(at: indexPath)
-
         }
     }
     
@@ -600,10 +531,7 @@ extension TransactionViewController: UITableViewDelegate, UITableViewDataSource 
         
         transactionInfoViewController.title = "Transaction Info"
         navigationController?.pushViewController(transactionInfoViewController, animated: true)
-        
-
     }
-    
 }
 
 //MARK: - UISearchBarDelegate
@@ -612,8 +540,6 @@ extension TransactionViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         getItems(for: searchText)
         expenseCount = 0.0
-//        incomeCount = 0.0
-//        calculateIncome()
         calculateExpense()
         
         yourBalanceLabel.text = "Your balance: \(incomeCount)"
@@ -627,14 +553,13 @@ extension TransactionViewController: UISearchBarDelegate {
         expenseCount = 0.0
         incomeCount = 0.0
         tableView.reloadData()
-        
     }
 }
 
 //MARK: - NSFetchedResultsControllerDelegate
 
 extension TransactionViewController: NSFetchedResultsControllerDelegate {
-
+    
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
         tableView.reloadData()
@@ -707,43 +632,42 @@ extension TransactionViewController: UICollectionViewDelegate, UICollectionViewD
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCollectionViewCell", for: indexPath) as? CustomCollectionViewCell else { return UICollectionViewCell() }
         
         let reversedMonhtArray: [String] = Array(monthArray.reversed())
-             
+        
         let month = reversedMonhtArray[indexPath.row]
-
+        
         let dateFormatterrr = DateFormatter()
         dateFormatterrr.locale = Locale(identifier: "en")
         dateFormatterrr.dateFormat = "MMMM"
-
+        
         let monthDate = dateFormatterrr.date(from: month)
-
+        
         func startOfMonth() -> Date? {
             var comp: DateComponents = Calendar.current.dateComponents([.year, .month, .day], from: Calendar.current.startOfDay(for: monthDate!))
             comp.year = 2022
-//            comp.day! += 1
-                return Calendar.current.date(from: comp)!
+            
+            return Calendar.current.date(from: comp)!
         }
-
+        
         func endOfMonth() -> Date? {
             var comp: DateComponents = Calendar.current.dateComponents([.year, .month , .day], from: Calendar.current.startOfDay(for: monthDate!))
             comp.month! += 1
             comp.day = 0
             comp.year = 2022
-                return Calendar.current.date(from: comp)!
+            return Calendar.current.date(from: comp)!
         }
-
+        
         let firstDay = startOfMonth()
         let lastDay = endOfMonth()
         
         let dateFormatterrrr = DateFormatter()
         dateFormatterrrr.locale = Locale(identifier: "en")
         dateFormatterrrr.dateFormat = "dd/MM/yyyy"
-
+        
         let firstD = dateFormatterrrr.string(from: firstDay!)
         let lastD = dateFormatterrrr.string(from: lastDay!)
-
         
         cell.textLabel.text = "\(firstD) - \(lastD)"
-
+        
         return cell
     }
 }
@@ -755,5 +679,3 @@ extension TransactionViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 220, height: 40)
     }
 }
-
-
