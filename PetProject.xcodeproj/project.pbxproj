@@ -19,11 +19,11 @@
 		CE67E4D628805318001515C8 /* Transaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67E4D428805318001515C8 /* Transaction+CoreDataClass.swift */; };
 		CE67E4D728805318001515C8 /* Transaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67E4D528805318001515C8 /* Transaction+CoreDataProperties.swift */; };
 		CE6C888128880F8800D88D1E /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C888028880F8800D88D1E /* CustomCell.swift */; };
-		CE85AE9C2890139400D35F30 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85AE9B2890139400D35F30 /* CustomCollectionViewCell.swift */; };
+		CE7AC24E28B8DB9C00EF3BAE /* AddNewTransaction+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7AC24D28B8DB9C00EF3BAE /* AddNewTransaction+Views.swift */; };
 		CEBF303B28843B8D0015168A /* TransactionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF303A28843B8D0015168A /* TransactionInfoViewController.swift */; };
 		CEBF303D288552590015168A /* AddNewTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF303C288552590015168A /* AddNewTransactionViewController.swift */; };
-		CEEC84C72896839A00676C52 /* Profit+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC84C52896839A00676C52 /* Profit+CoreDataClass.swift */; };
-		CEEC84C82896839A00676C52 /* Profit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC84C62896839A00676C52 /* Profit+CoreDataProperties.swift */; };
+		CED810C628B6497F00029B89 /* TransactionViewController+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED810C528B6497F00029B89 /* TransactionViewController+Views.swift */; };
+		CED810CC28B6766300029B89 /* TransactionInfoViewController+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED810CB28B6766300029B89 /* TransactionInfoViewController+Views.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,11 +41,11 @@
 		CE67E4D428805318001515C8 /* Transaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CE67E4D528805318001515C8 /* Transaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CE6C888028880F8800D88D1E /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
-		CE85AE9B2890139400D35F30 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
+		CE7AC24D28B8DB9C00EF3BAE /* AddNewTransaction+Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddNewTransaction+Views.swift"; sourceTree = "<group>"; };
 		CEBF303A28843B8D0015168A /* TransactionInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionInfoViewController.swift; sourceTree = "<group>"; };
 		CEBF303C288552590015168A /* AddNewTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTransactionViewController.swift; sourceTree = "<group>"; };
-		CEEC84C52896839A00676C52 /* Profit+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profit+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CEEC84C62896839A00676C52 /* Profit+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profit+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CED810C528B6497F00029B89 /* TransactionViewController+Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionViewController+Views.swift"; sourceTree = "<group>"; };
+		CED810CB28B6766300029B89 /* TransactionInfoViewController+Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionInfoViewController+Views.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +88,16 @@
 			path = PetProject;
 			sourceTree = "<group>";
 		};
+		CE7AC24F28BA112F00EF3BAE /* ViewControllers+Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CED810C528B6497F00029B89 /* TransactionViewController+Views.swift */,
+				CED810CB28B6766300029B89 /* TransactionInfoViewController+Views.swift */,
+				CE7AC24D28B8DB9C00EF3BAE /* AddNewTransaction+Views.swift */,
+			);
+			path = "ViewControllers+Extension";
+			sourceTree = "<group>";
+		};
 		CEEC84CD2897C7D600676C52 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +110,7 @@
 		CEEC84CE2897C7FE00676C52 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CE7AC24F28BA112F00EF3BAE /* ViewControllers+Extension */,
 				CE163101286B776600BE720B /* MainViewController.swift */,
 				CE163133286B805400BE720B /* TransactionViewController.swift */,
 				CEBF303A28843B8D0015168A /* TransactionInfoViewController.swift */,
@@ -111,7 +122,6 @@
 		CEEC84CF2897D03B00676C52 /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
-				CE85AE9B2890139400D35F30 /* CustomCollectionViewCell.swift */,
 				CE6C888028880F8800D88D1E /* CustomCell.swift */,
 			);
 			path = CustomCell;
@@ -140,8 +150,6 @@
 		CEEC84D22897D64200676C52 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				CEEC84C52896839A00676C52 /* Profit+CoreDataClass.swift */,
-				CEEC84C62896839A00676C52 /* Profit+CoreDataProperties.swift */,
 				CE67E4D428805318001515C8 /* Transaction+CoreDataClass.swift */,
 				CE67E4D528805318001515C8 /* Transaction+CoreDataProperties.swift */,
 			);
@@ -219,15 +227,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE7AC24E28B8DB9C00EF3BAE /* AddNewTransaction+Views.swift in Sources */,
 				CE163102286B776600BE720B /* MainViewController.swift in Sources */,
+				CED810C628B6497F00029B89 /* TransactionViewController+Views.swift in Sources */,
 				CE1630FE286B776600BE720B /* AppDelegate.swift in Sources */,
 				CE163100286B776600BE720B /* SceneDelegate.swift in Sources */,
-				CEEC84C72896839A00676C52 /* Profit+CoreDataClass.swift in Sources */,
-				CE85AE9C2890139400D35F30 /* CustomCollectionViewCell.swift in Sources */,
+				CED810CC28B6766300029B89 /* TransactionInfoViewController+Views.swift in Sources */,
 				CE67E4D1288044C3001515C8 /* PetProject.xcdatamodeld in Sources */,
 				CE67E4D628805318001515C8 /* Transaction+CoreDataClass.swift in Sources */,
 				CEBF303D288552590015168A /* AddNewTransactionViewController.swift in Sources */,
-				CEEC84C82896839A00676C52 /* Profit+CoreDataProperties.swift in Sources */,
 				CE67E4D728805318001515C8 /* Transaction+CoreDataProperties.swift in Sources */,
 				CE163134286B805400BE720B /* TransactionViewController.swift in Sources */,
 				CE67E4D32880484B001515C8 /* CoreDataStack.swift in Sources */,

@@ -5,11 +5,9 @@ class CustomCell: UITableViewCell {
     //MARK: - Private properties
     
     let coverView = UIView()
-    
     let dateAndAmountStackView = UIStackView()
     let dateAndNoteStackView = UIStackView()
     let dayAndNoteStackView = UIStackView()
-    
     let dayLabel = UILabel()
     let dateLabel = UILabel()
     let amountLabel = UILabel()
@@ -25,7 +23,6 @@ class CustomCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
-
         configureAmountLabel()
         configureNoteLabel()
         configureDayLabel()
